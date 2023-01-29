@@ -1,0 +1,320 @@
+\documentclass[uplatex, a4paper,11pt]{jsarticle}
+
+
+% 数式
+\usepackage{amsmath,amsfonts}
+\usepackage{bm}
+% 画像
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{amsmath,amssymb,amsfonts,latexsym}
+\usepackage{enumerate}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{ascmac}
+\usepackage{setspace}
+\usepackage{here}
+\usepackage{comment}
+\usepackage{bm}
+\usepackage{physics}
+\usepackage{braket}
+\usepackage{fancybox}
+\usepackage{fancyhdr}
+\usepackage{url}
+%\usepackage{jumoline}
+\usepackage{listings,jlisting} %日本語のコメントアウトをする場合jlistingが必要
+\usepackage{ifthen}
+\usepackage{tabularx}
+\usepackage{comment}
+\usepackage{multirow}
+
+\newlength{\myansboxlength}
+\newcommand{\ansbox}[1]{%
+\settowidth{\myansboxlength}{#1}%
+\setlength{\fboxsep}{2pt}%
+\setlength{\fboxrule}{1pt}%
+\ifthenelse{\lengthtest{\the\myansboxlength<20pt}}%
+{\framebox[1.0cm]{\textgt{\small #1}}}%
+{\fbox{\hbox{\hspace{0.35zw}}\textgt{\small #1}\hbox{\hspace{0.35zw}}}}}
+
+\newcommand{\maru}[1]{{\ooalign{%
+\hfil\hbox{$\bigcirc$}\hfil\crcr%
+\hfil\hbox{#1}\hfil}}}
+
+%\newcommand{\yen}{{\ooalign{Y\crcr\hss=\hss}}}
+\def\yen{{\setbox0=\hbox{Y}Y\kern-.85\wd0\vbox{%
+\hrule height.1ex width.70\wd0\kern.25ex%
+\hrule height.1ex width.70\wd0\kern.40ex}}}
+
+%ここからソースコードの表示に関する設定
+%\lstset{
+\lstdefinestyle{customc}{
+	%プログラム言語(複数の言語に対応，C,C++も可)
+ 	language = C,
+ 	%背景色と透過度
+ 	backgroundcolor={\color[gray]{.95}},
+ 	%枠外に行った時の自動改行
+ 	breaklines = true,
+ 	%自動改行後のインデント量(デフォルトでは20[pt])
+ 	breakindent = 10pt,
+ 	%標準の書体
+ 	%basicstyle = \ttfamily\scriptsize,
+  basicstyle=\fontsize{8}{10}\selectfont\ttfamily,
+ 	%コメントの書体
+ 	commentstyle = {\itshape \color[cmyk]{1,0.4,1,0}},
+ 	%関数名等の色の設定
+ 	classoffset = 0,
+ 	%キーワード(int, ifなど)の書体
+ 	keywordstyle = {\bfseries \color[cmyk]{0,1,0,0}},
+ 	%表示する文字の書体
+ 	stringstyle = {\ttfamily \color[rgb]{0,0,1}},
+ 	%枠 "t"は上に線を記載, "T"は上に二重線を記載
+	%他オプション：leftline，topline，bottomline，lines，single，shadowbox
+ 	frame = TBrl,
+ 	%frameまでの間隔(行番号とプログラムの間)
+ 	framesep = 5pt,
+ 	%行番号の位置
+ 	numbers = left,
+	%行番号の間隔
+ 	stepnumber = 1,
+	%行番号の書体
+ 	numberstyle = \tiny,
+	%タブの大きさ
+ 	tabsize = 4,
+ 	%キャプションの場所("tb"ならば上下両方に記載)
+ 	captionpos = t
+}
+%ここまでソースコードの表示に関する設定
+\lstdefinestyle{custombash}{
+		rulesepcolor=\color{black},
+		language=bash
+}
+%\newtcblisting{codeBash}[1][]{%
+%	title = {Bash},
+%	listing options={style=bash,{#1}}
+%}
+%ここからソースコードの表示に関する設定
+\lstdefinestyle{customc_alt}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  numbers=left,
+  frame=single,
+  xleftmargin=\parindent,
+  language=C,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
+
+\lstdefinestyle{custompy}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  numbers=left,
+  frame=single,
+  xleftmargin=\parindent,
+  language=python,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
+
+\lstdefinestyle{customasm}{
+  belowcaptionskip=1\baselineskip,
+  frame=single,
+  numbers=left,
+  xleftmargin=\parindent,
+  language=[x86masm]Assembler,
+  basicstyle=\footnotesize\ttfamily,
+  commentstyle=\itshape\color{purple!40!black},
+}
+
+\lstset{escapechar=@,style=customc}
+
+%ここからソースコードの表示に関する設定
+%\lstset{
+%  basicstyle={\ttfamily},
+%  identifierstyle={\small},
+%  commentstyle={\smallitshape},
+%  keywordstyle={\small\bfseries},
+%  ndkeywordstyle={\small},
+%  stringstyle={\small\ttfamily},
+%  frame={tb},
+%  breaklines=true,
+%  columns=[l]{fullflexible},
+%  numbers=left,
+%  xrightmargin=0zw,
+%  xleftmargin=3zw,
+%  numberstyle={\scriptsize},
+%  stepnumber=1,
+%  numbersep=1zw,
+%  lineskip=-0.5ex
+%}
+%ここまでソースコードの表示に関する設定
+\makeatletter
+\def\ps@plainfoot{%
+  \let\@mkboth\@gobbletwo
+  \let\@oddhead\@empty
+  \def\@oddfoot{\normalfont\hfil-- \thepage\ --\hfil}%
+  \let\@evenhead\@empty
+  \let\@evenfoot\@oddfoot}
+  \let\ps@plain\ps@plainfoot
+%\@openrighttrue
+
+%
+%\newcommand{\maru}[1]{{\ooalign{%
+%\hfil\hbox{$\bigcirc$}\hfil\crcr%
+%\hfil\hbox{#1}\hfil}}}
+%
+\setlength{\textwidth}{\fullwidth}
+\setlength{\textheight}{40\baselineskip}
+\addtolength{\textheight}{\topskip}
+\setlength{\voffset}{-0.55in}
+%
+%\pagestyle{footnombre}
+%
+\begin{document}
+% START DOCUMENT
+%
+
+\title{C言語における論理演算}
+\author{S.Matoike}
+\date{\today}
+\maketitle
+
+\thispagestyle{empty}
+\clearpage
+\addtocounter{page}{-1}
+%\newpage
+\setcounter{tocdepth}{1}
+\newpage
+
+\lstset{escapechar=@,style=customc}
+\lstinputlisting[caption=C言語で論理演算,label=CLogical]{../src/cLogic.c}
+
+\newpage
+
+\lstset{escapechar=@,style=custombash}
+\begin{lstlisting}[caption=プログラムの実行結果,label=CLogicalExecuted]
+ === NOT:(~a) ===
+  a = 1010 0101 1010 0101 1010 0101 1010 0101 = ( 0xA5A5A5A5 )
+ ~a = 0101 1010 0101 1010 0101 1010 0101 1010 = ( 0x5A5A5A5A )
+ 
+ === AND:(a & b) ===
+ a     = 1010 0101 1010 0101 1010 0101 1010 0101 = ( 0xA5A5A5A5 )
+ b     = 0000 0000 0000 0000 0000 0000 1111 1111 = ( 0x000000FF )
+ a & b = 0000 0000 0000 0000 0000 0000 1010 0101 = ( 0x000000A5 )
+ 
+ === OR:(a | b) ===
+ a     = 1010 0101 1010 0101 1010 0101 1010 0101 = ( 0xA5A5A5A5 )
+ b     = 0000 0000 0000 0000 0000 0000 1111 1111 = ( 0x000000FF )
+ a | b = 1010 0101 1010 0101 1010 0101 1111 1111 = ( 0xA5A5A5FF )
+ 
+ === XOR:(a ^ b ) ===
+ a     = 1010 0101 1010 0101 1010 0101 1010 0101 = ( 0xA5A5A5A5 )
+ b     = 1111 1111 1111 1111 1111 1111 1111 1111 = ( 0xFFFFFFFF )
+ a ^ b = 0101 1010 0101 1010 0101 1010 0101 1010 = ( 0x5A5A5A5A )
+ 
+ a     = 1010 0101 1010 0101 1010 0101 1010 0101 = ( 0xA5A5A5A5 )
+ b     = 0000 0000 0000 0000 0000 0000 0000 0000 = ( 0x00000000 )
+ a ^ b = 1010 0101 1010 0101 1010 0101 1010 0101 = ( 0xA5A5A5A5 )
+ 
+ === c = (( a & 3) << 8 ) | (b & 255 ) ===
+ a を入力して：   90
+ b を入力して： 1355
+
+a                 = 0000 0000 0000 0000 0000 0000 0101 1010 = ( 0x0000005A )
+     3            = 0000 0000 0000 0000 0000 0000 0000 0011 = ( 0x00000003 )
+a &  3            = 0000 0000 0000 0000 0000 0000 0000 0010 = ( 0x00000002 )
+(a & 3) << 8      = 0000 0000 0000 0000 0000 0010 0000 0000 = ( 0x00000200 )
+
+b                 = 0000 0000 0000 0000 0000 0101 0100 1011 = ( 0x0000054B )
+    255           = 0000 0000 0000 0000 0000 0000 1111 1111 = ( 0x000000FF )
+b & 255           = 0000 0000 0000 0000 0000 0000 0100 1011 = ( 0x0000004B )
+
+c=(a&3)<<8+(b&255)= 0000 0000 0000 0000 0000 0010 0100 1011 = ( 0x0000024B )
+\end{lstlisting}
+
+\begin{itemize}
+\item 以下のことについて確認します。
+\begin{itemize}
+  \item 単項演算子のNOTと、二項演算子のAND,OR,XOR
+  \item AND演算で、指定したbitのマスキングによる切り出し操作
+  \item OR演算で、指定したbitを(無理やり) 1 にしてしまう操作
+  \item 0xFF$\cdots$FF とのXOR演算で、bit反転したデータ(これは1の補数)を作れること
+  \item 0x00$\cdots$00 とのXOR演算では、何も変わらないこと
+  \item 同じデータ同士のXOR演算では、ゼロで埋められたデータになること 
+\end{itemize}
+\item 応用問題では、a の下 2bit と b の 8bit をつないで、10bit のデータ c を作っています。
+\begin{itemize}
+\item まず最初に、変数 a の下 2bit を切り出すために、次のマスキング操作を施します\\下 2bit だけが 1 であるような数値 0x00$\cdots$03 との論理積をとります
+\item 次に、変数 b の 8bit を納める場所を確保するために、a を左に 8bit シフトしています
+\item 最後に、その値と b (これもマスキングによって下 8bit を切り出している) との論理和をとって合計 10bit のデータを作り、それを変数 c に代入しています
+\end{itemize}
+この様な操作は、10bitのAD変換器の出力を受け取る様な場面でしばしば現れます。\\
+\item 【演習】
+\begin{itemize}
+\item[(1)] 12bitのAD変換器が出力するデータを受け取る場合には、a の下 4bit と b の 8bit をつないで、
+12bit のデータ c を作る必要が生じます。さて、どんな操作になるかな。
+\item[(2)] a の下6bit と b の下4bit をつないで、10bit のデータ c を作る場合はどうですか。\\
+(こんな必要を生じる場面が実際にあるかどうか知らないけど、練習だから) 
+\end{itemize}
+\item 応用問題の演算
+\begin{verbatim}
+c = ( (a & 3) << 8 ) | (b & 255)
+\end{verbatim}
+1bit 左にシフトすると、その値は2倍になる(右に 1bit シフトすると$1/2$)。
+8bit 左にシフトしているので、変数 a の値は$2^8=256$倍になりますから、次の様に書いてもOkです。
+\begin{verbatim}
+c = ( (a & 3) * 256 ) + (b & 255)
+\end{verbatim}
+%\end{itemize}
+
+%\begin{itemize}
+\item 関数main()の冒頭
+\begin{verbatim}
+  sprintf( frm, "%s%c%s", " = ( 0x%0", CHAR_BIT+'0' ,"X )" );  
+\end{verbatim}
+この部分では、関数binhex()の中のprintf()で使っている書式文字列frmを作っています。
+\begin{verbatim}
+  CHAR_BIT + '0'
+\end{verbatim}
+ここでは、整数のCHAR\_BITをASCII文字のコードに変換しています。\\
+数字('0','1','2','3','4','5','6','7','8','9')の各文字は、
+文字コード表の上でこの順番に並んでいますから、
+数字'0'の文字コードからのオフセットによって、それぞれの文字コードを表す事ができます。
+(数字 '8' は 数字 '0' のコードから数値 8 だけ離れた所にある)
+%C言語のchar型は 1Byte の整数です
+\item 整数変数を2進数の形で出力するためには、printb()のような関数を作らなければなりません。
+最初に左端のbit(MSB)だけを1にしたmaskを用意して、
+そのmaskの中の1の位置を 1bit ずつ右にシフトしながら後判定反復しています。\\
+(1のbitが右端から掃き出されたら、maskは0で「偽」。反復は終了する)
+\begin{verbatim}
+  do {
+        ・・・・・・・
+  } while ( mask >>= 1 );   /* mask>>=1 は mask/=2 でもOk */
+\end{verbatim}
+マスキング操作(mask と v の論理積)の結果によって、0と1の判定をしています。
+\begin{verbatim}
+  putchar ( mask & v ? '1' : '0' );
+\end{verbatim}
+この部分を馴染みのある表現で書き直すと、次のようになります。
+\begin{verbatim}
+  if ( (mask & v) != 0 ) putchar('1');
+  else                   putchar('0');
+\end{verbatim}
+4bit 毎（カウンタ n を 4 で割った余りが0なら）にスペースを1つ出力しています。\\
+また、if文の条件判定の「後」で、 n の値をインクリメント $n++$ しています。
+\begin{verbatim}
+  if ( n++%4==0 ) putchar ( '␣' );
+\end{verbatim}
+\end{itemize}
+
+\end{document}
